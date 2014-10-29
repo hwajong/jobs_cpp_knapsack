@@ -132,6 +132,8 @@ private:
 
 			selected_index_vec = optimal_selected_vec;
 			selected_index_vec.push_back(optimal_selected);
+			//printf("selected index : %d\n", optimal_selected);
+
 		}
 
 		// 중간 결과값 저장
@@ -162,7 +164,10 @@ private:
 			}
 		}
 
-		selected_index_vec.push_back(optimal_selected_index);
+		if(optimal_value > 0)
+		{
+			selected_index_vec.push_back(optimal_selected_index);
+		}
 		return optimal_value;
 	}
 
@@ -192,9 +197,12 @@ public:
 
 		int total_weight = 0;
 		int total_profit = 0;
+		//cout << "best_selected_index_vec.size : " << best_selected_index_vec.size() << endl;
 		for(int i=best_selected_index_vec.size()-1; i>=0; i--)
 		{
-			Citem& item = my_item_list[best_selected_index_vec[i]];
+			int index = best_selected_index_vec[i];
+			//cout << index << endl;
+			Citem& item = my_item_list[index];
 			ofs << item.to_str() << endl;
 			total_weight += item.get_weight();
 			total_profit += item.get_profit();
