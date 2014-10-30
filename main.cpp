@@ -64,8 +64,8 @@ private:
 		char* p = s;
 		int l = strlen(p);
 
-		while(l > 0 && isspace(p[l - 1])) p[--l] = 0;
-		while(*p && isspace(*p)) ++p, --l;
+		while(l-1 > 0 && !(p[l-1] & 0x80) && isspace(p[l-1])) p[--l] = 0;
+		while(*p && !(*p & 0x80) && isspace(*p)) ++p, --l;
 
 		memmove(s, p, l + 1);
 	}
